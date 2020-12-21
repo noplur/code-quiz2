@@ -7,4 +7,4 @@
 ### The link to the website of the password generator can be viewed here: https://noplur.github.io/code-quiz2/
 
 ### Here is a screenshot of the Code Quiz:
-### ![](./Assets/Images/codequiz-screenshot)
+### ![](./assets/images/codequiz-screenshot)
