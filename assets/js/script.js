@@ -76,7 +76,7 @@ function startQuiz() {
 //function for timer
 var counter = document.getElementById('counter');
 var timer;
-// set initial timer for 60 seconds
+// set initial timer for 75 seconds
 var time = 75;
 var current = myQuestions[index];
 // elements for 'submit button' in case time runs out
@@ -161,11 +161,13 @@ function buildQuiz() {
 
   // function for once all questions have been answered
 
-  var resultsSection = document.getElementById('results');
-  var initialsFormEl = document.getElementById('initials-form');
+  // var resultsSection = document.getElementById('results');
+  // var initialsFormEl = document.getElementById('initials-form');
 
   // displays final score 
   function myResults() {
+    var initialsFormEl = document.getElementById('initials-form');
+
     questionEl.innerHTML = "All done! Your final score is " + score;
     answersEl.innerHTML = "Enter initials:"
     prevAnswer.innerHTML = ""
@@ -189,13 +191,16 @@ function highScoreList() {
 }
 
 // submit player scores and initials to local storage
-var playerScore = score;  //find and replace what is 'score'
-var playerInitials = initialsFormEl; //find and replace what is 'initial'
-var highScore = localStorage.getItem("highscore");
+
 
 function submitScoreFormHandler (event) {
   event.preventDefault
   let highScoreArray = []
+  var playerScore = score;  
+  var initialsFormEl = document.getElementById('initials');
+  var playerInitials = initialsFormEl.value;
+  console.log(playerInitials);
+  var highScore = localStorage.getItem("highscore");
   var previousScores = JSON.parse(localStorage.getItem('scores'));
 
  if (previousScores === null) {
@@ -207,9 +212,53 @@ else {
   highScoreArray.push({score: playerScore, initials: playerInitials});
   localStorage.setItem('scores', JSON.stringify(highScoreArray));
 }
+
+var questionSection = document.getElementById("questionSection");
+questionSection.classList.add("hidden");
+
+var highScoreSection = document.getElementById("highScore");
+highScoreSection.classList.remove("hidden");
+var allScores = document.getElementById("all-scores")
+allScores.innerHTML= "";
+
+highScoreArray.sort((a, b) => b.score- a.score);
+highScoreArray.forEach(function (score){
+  var p = document.createElement("p")
+  p.textContent = score.initials + ":" + score.score;
+  allScores.appendChild (p);
+})
+}
+
+var showHighScores = function () {
+  var highScoreArray = JSON.parse(localStorage.getItem('scores'));
+  var startSection = document.getElementById("quiz");
+  startSection.classList.add("hidden");
+
+  var highScoreSection = document.getElementById("highScore");
+  highScoreSection.classList.remove("hidden");
+  var allScores = document.getElementById("all-scores")
+  allScores.innerHTML= "";
+
+  highScoreArray.sort((a, b) => b.score- a.score);
+  highScoreArray.forEach(function (score){
+  var p = document.createElement("p")
+  p.textContent = score.initials + ":" + score.score;
+  allScores.appendChild (p);
+})
 }
   
+var restartQuiz = function () {
+  index = 0;
+  score = 0;
+  time = 75;
+  counter.textContent = "time remaining: " + time;
 
+  var startSection = document.getElementById("quiz");
+  startSection.classList.remove("hidden");
+  
+  var highScoreSection = document.getElementById("highScore");
+  highScoreSection.classList.add("hidden");
+}
 
   
 // check localStorage for high score, if it's not there, use 0
@@ -233,6 +282,13 @@ startButton.onclick= startQuiz
 
 var submitBtnEl = document.querySelector("#submitBtn");
 submitBtnEl.addEventListener("click", submitScoreFormHandler);
+
+var restartBtn = document.querySelector("#restart");
+
+restartBtn.addEventListener("click", restartQuiz);
+
+var viewHighScores = document.querySelector(".high-scores");
+viewHighScores.addEventListener("click", showHighScores);
 
 // submitButton.onclick= highScoreList;
 
