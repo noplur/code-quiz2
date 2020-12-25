@@ -100,7 +100,7 @@ function countDown () {
       counter.textContent = "Womp! Womp!";
       clearInterval (timer);
       questionEl.innerHTML = "Time's up!";
-      answersEl.innerHTML = "Your final score is " + score;
+      answersEl.innerHTML = "Your final score is " + time;
       prevAnswer.innerHTML = "Enter initials:"
       initialsFormEl.style.display = 'block';
       submitBtnEl.style.display = 'block';
@@ -139,7 +139,6 @@ function buildQuiz() {
     var current = myQuestions[index];
     if (current.correctAnswer === this.textContent) {
       // send feedback for correct answer
-      score++;
       prevAnswer.textContent = "Correct";
     }
     else {
@@ -155,13 +154,10 @@ function buildQuiz() {
     }
   };
 
-
   // displays final score 
-
   function myResults() {
     var initialsFormEl = document.getElementById('initials-form');
-
-    questionEl.innerHTML = "All done! Your final score is " + score;
+    questionEl.innerHTML = "All done! Your final score is " + time;
     answersEl.innerHTML = "Enter initials:"
     prevAnswer.innerHTML = ""
     initialsFormEl.style.display = 'block';
@@ -174,7 +170,6 @@ function buildQuiz() {
 function highScoreList() {
   var initialsFormEl = document.getElementById('initials-form');
   var submitBtnEl = document.getElementById('submitBtn');
-
   questionEl.innerHTML = "High Scores";
   answersEl.innerHTML = ""
   prevAnswer.innerHTML = ""
@@ -188,10 +183,9 @@ function highScoreList() {
 function submitScoreFormHandler (event) {
   event.preventDefault
   let highScoreArray = []
-  var playerScore = score;  
+  var playerScore = time;  
   var initialsFormEl = document.getElementById('initials');
   var playerInitials = initialsFormEl.value;
-  console.log(playerInitials);
   var highScore = localStorage.getItem("highscore");
   var previousScores = JSON.parse(localStorage.getItem('scores'));
 
