@@ -129,6 +129,8 @@
     color: gray;
     text-align: center;
     padding-top: 20px;
+    margin-right: 5%;
+    padding-bottom: 20px;
   }
 
   #initials-form {
