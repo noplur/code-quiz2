@@ -123,11 +123,11 @@ function buildQuiz() {
   questionEl.textContent = current.question
   current.answers.forEach (function (answer, i){
 
-    //button to click to answer question
-    var aBtn = document.createElement("button")
-    aBtn.textContent = answer
-    aBtn.onclick = checkAnswer
-    answersEl.appendChild(aBtn)
+  //button to click to answer question
+  var aBtn = document.createElement("button")
+  aBtn.textContent = answer
+  aBtn.onclick = checkAnswer
+  answersEl.appendChild(aBtn)
   })
 }
 
@@ -137,19 +137,15 @@ function buildQuiz() {
 
   function checkAnswer () {
     var current = myQuestions[index];
-    // console.log (current);
     if (current.correctAnswer === this.textContent) {
       // send feedback for correct answer
       score++;
       prevAnswer.textContent = "Correct";
-      // window.confirm("correct");
     }
     else {
       time -= 10
       prevAnswer.textContent = "Wrong";
-      // window.confirm("wrong");
     }
-    // console.log(this.textContent);
     index++ 
     if (index < myQuestions.length) {
       buildQuiz ();
@@ -159,12 +155,9 @@ function buildQuiz() {
     }
   };
 
-  // function for once all questions have been answered
-
-  // var resultsSection = document.getElementById('results');
-  // var initialsFormEl = document.getElementById('initials-form');
 
   // displays final score 
+
   function myResults() {
     var initialsFormEl = document.getElementById('initials-form');
 
@@ -187,7 +180,6 @@ function highScoreList() {
   prevAnswer.innerHTML = ""
   initialsFormEl.style.display = 'none';
   submitBtnEl.style.display = 'none';
-  // clearInterval (timer);
 }
 
 // submit player scores and initials to local storage
@@ -260,18 +252,6 @@ var restartQuiz = function () {
   highScoreSection.classList.add("hidden");
 }
 
-  
-// check localStorage for high score, if it's not there, use 0
-// if (highScore === null) {
-//   highScore = 0;
-// }
-
-  // if (playerScore > highScore) {
-  //   localStorage.setItem("player-score", playerScore);
-  //   localStorage.setItem("player-initials", playerInitials);
-  // }
-// }
-
 // start quiz by clicking on start button
 
 var startButton = document.getElementById('startBtn');
@@ -289,7 +269,3 @@ restartBtn.addEventListener("click", restartQuiz);
 
 var viewHighScores = document.querySelector(".high-scores");
 viewHighScores.addEventListener("click", showHighScores);
-
-// submitButton.onclick= highScoreList;
-
-// submitButton.onclick= startQuiz
