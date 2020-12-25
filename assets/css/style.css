@@ -90,6 +90,10 @@
     text-align: center;
   }
 
+  #all-scores {
+    text-align: center;
+  }
+
   button {
     outline: none;
     padding: 5px 20px;
@@ -127,6 +131,10 @@
     margin-left: 47%;
     align-items: center;
     position: relative;
+    text-align: center;
+  }
+  h5 {
+    font-size: 20px;
     text-align: center;
   }
 

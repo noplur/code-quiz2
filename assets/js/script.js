@@ -216,7 +216,7 @@ allScores.innerHTML= "";
 highScoreArray.sort((a, b) => b.score- a.score);
 highScoreArray.forEach(function (score){
   var p = document.createElement("p")
-  p.textContent = score.initials + ":" + score.score;
+  p.textContent = score.initials + " - " + score.score;
   allScores.appendChild (p);
 })
 }
