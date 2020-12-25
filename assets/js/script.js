@@ -213,10 +213,12 @@ highScoreSection.classList.remove("hidden");
 var allScores = document.getElementById("all-scores")
 allScores.innerHTML= "";
 
+var sortNumber = 1;
+
 highScoreArray.sort((a, b) => b.score- a.score);
 highScoreArray.forEach(function (score){
   var p = document.createElement("p")
-  p.textContent = score.initials + " - " + score.score;
+  p.textContent = sortNumber++ + ". " + score.initials + " - " + score.score;
   allScores.appendChild (p);
 })
 }
@@ -231,10 +233,12 @@ var showHighScores = function () {
   var allScores = document.getElementById("all-scores")
   allScores.innerHTML= "";
 
+  var sortNumber = 1;
+
   highScoreArray.sort((a, b) => b.score- a.score);
   highScoreArray.forEach(function (score){
   var p = document.createElement("p")
-  p.textContent = score.initials + " - " + score.score;
+  p.textContent = sortNumber++ + ". " + score.initials + " - " + score.score;
   allScores.appendChild (p);
 })
 }
