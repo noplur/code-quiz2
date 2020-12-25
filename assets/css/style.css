@@ -91,7 +91,15 @@
   }
 
   #all-scores {
-    text-align: center;
+    margin-left: 10%;
+  }
+
+  p {
+    background-color: lavender;
+    width: 30%;
+    margin: auto;
+    text-align: left;
+    margin-top: 1%;
   }
 
   button {

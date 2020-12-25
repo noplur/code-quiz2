@@ -238,6 +238,11 @@ var showHighScores = function () {
   allScores.appendChild (p);
 })
 }
+
+var clearHighScores = function () {
+  var allScores = document.getElementById("all-scores")
+  allScores.innerHTML= "";
+}
   
 var restartQuiz = function () {
   index = 0;
@@ -264,8 +269,12 @@ var submitBtnEl = document.querySelector("#submitBtn");
 submitBtnEl.addEventListener("click", submitScoreFormHandler);
 
 var restartBtn = document.querySelector("#restart");
-
 restartBtn.addEventListener("click", restartQuiz);
 
 var viewHighScores = document.querySelector(".high-scores");
 viewHighScores.addEventListener("click", showHighScores);
+
+
+
+var clearScoresBtn = document.querySelector("#clear-scores");
+clearScoresBtn.addEventListener("click", clearHighScores);
