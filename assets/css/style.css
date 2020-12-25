@@ -106,6 +106,8 @@
     display: inline-block;
     margin: 0% 40%;
     text-align: left;
+    width: fit-content;
+    white-space: nowrap;
   }
 
   button:hover {
@@ -133,9 +135,31 @@
     position: relative;
     text-align: center;
   }
+
   h5 {
     font-size: 20px;
     text-align: center;
+  }
+
+  #go-back-buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+ #restart {
+    display: inline-block;
+    width: fit-content;
+    text-align: center;
+    margin: 5% 2% 0% 70%;
+    white-space: nowrap;
+  }
+
+ #clear-scores {
+    text-align: center;
+    width: fit-content;
+    display: inline-block;
+    margin: 5% 60% 0% 0%;
+    white-space: nowrap;
   }
 
   footer {
