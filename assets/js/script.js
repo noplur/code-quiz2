@@ -138,8 +138,6 @@ function buildQuiz() {
 
   //function for what to do if answer is right or wrong
 
-  var resultsContainer = document.getElementById('results');
-
   function checkAnswer () {
     var current = myQuestions[index];
     if (current.correctAnswer === this.textContent) {
