@@ -89,6 +89,7 @@ function countDown () {
   var submitBtnEl = document.getElementById('submitBtn');
   time-- 
   counter.textContent = time
+    // displays questions as timer counts down
     if (time >= 0) {
       counter.textContent = "time remaining: " + time;
       time - - 1;
@@ -96,7 +97,7 @@ function countDown () {
       submitBtnEl.style.display = 'none';
     }
     else {
-      // removes questions from array and shows 'enter initials' and 'submit button'
+      // removes questions from array and shows 'enter initials' and 'submit button' if timer runs out
       counter.textContent = "Womp! Womp!";
       clearInterval (timer);
       questionEl.innerHTML = "Time's up!";
@@ -116,9 +117,13 @@ function buildQuiz() {
   var answersEl = document.getElementById('answers');
   var initialsFormEl = document.getElementById('initials-form');
   var submitBtnEl = document.getElementById('submitBtn');
+  // displays question
   questionEl.innerHTML = ""
+  // displays grid of answers
   answersEl.innerHTML = ""
+  // hides initials form
   initialsFormEl.style.display = 'none';
+  // hides submit button
   submitBtnEl.style.display = 'none';
   questionEl.textContent = current.question
   current.answers.forEach (function (answer, i){
@@ -142,14 +147,19 @@ function buildQuiz() {
       prevAnswer.textContent = "Correct";
     }
     else {
+      // removes 10 seconds from timer
       time -= 10
+      // send feedback for wrong answer
       prevAnswer.textContent = "Wrong";
     }
+    //  move on to next question
     index++ 
     if (index < myQuestions.length) {
+      // repeat function for quiz
       buildQuiz ();
     } 
     else {
+      // what to do when last question of quiz has been answered
       myResults ();
     }
   };
@@ -157,28 +167,21 @@ function buildQuiz() {
   // displays final score 
   function myResults() {
     var initialsFormEl = document.getElementById('initials-form');
+    // displays final score as time remainding
     questionEl.innerHTML = "All done! Your final score is " + time;
+    // asks to enter initials
     answersEl.innerHTML = "Enter initials:"
+    // hides notice displaying whether previous answer was correct or wrong
     prevAnswer.innerHTML = ""
+    // displays form to enter initials
     initialsFormEl.style.display = 'block';
+    // displays submit button
     submitBtnEl.style.display = 'block';
+    // stops the timer
     clearInterval (timer);
   }
 
-// function for displaying list of highscores
-
-function highScoreList() {
-  var initialsFormEl = document.getElementById('initials-form');
-  var submitBtnEl = document.getElementById('submitBtn');
-  questionEl.innerHTML = "High Scores";
-  answersEl.innerHTML = ""
-  prevAnswer.innerHTML = ""
-  initialsFormEl.style.display = 'none';
-  submitBtnEl.style.display = 'none';
-}
-
-// submit player scores and initials to local storage
-
+// submit player scores, initials to local storage and displays high scores
 
 function submitScoreFormHandler (event) {
   event.preventDefault
@@ -189,8 +192,10 @@ function submitScoreFormHandler (event) {
   var highScore = localStorage.getItem("highscore");
   var previousScores = JSON.parse(localStorage.getItem('scores'));
 
+// parses return value, assigns new variable to array, pushes new score into array, updates local storage with new array
  if (previousScores === null) {
     highScoreArray.push({score: playerScore, initials: playerInitials});
+    // stringify updated array with new score
     localStorage.setItem('scores', JSON.stringify(highScoreArray));
  }
 else {
@@ -199,14 +204,19 @@ else {
   localStorage.setItem('scores', JSON.stringify(highScoreArray));
 }
 
+// hides question section when high scores are displayed
 var questionSection = document.getElementById("questionSection");
 questionSection.classList.add("hidden");
 
+// displays highScore section
 var highScoreSection = document.getElementById("highScore");
 highScoreSection.classList.remove("hidden");
+
+// displays all the scores
 var allScores = document.getElementById("all-scores")
 allScores.innerHTML= "";
 
+// adds numeric list order value in front of all the scores
 var sortNumber = 1;
 
 highScoreArray.sort((a, b) => b.score- a.score);
@@ -217,6 +227,7 @@ highScoreArray.forEach(function (score){
 })
 }
 
+// function to display highscores when "view highscores" at top of page is clicked
 var showHighScores = function () {
   var highScoreArray = JSON.parse(localStorage.getItem('scores'));
   var startSection = document.getElementById("quiz");
@@ -237,11 +248,14 @@ var showHighScores = function () {
 })
 }
 
+// function to clear highscores when "clear highscores" button is clicked
 var clearHighScores = function () {
+  // hides "all-scores" div
   var allScores = document.getElementById("all-scores")
   allScores.innerHTML= "";
 }
-  
+ 
+//function to restart quiz when "go back" button is clicked
 var restartQuiz = function () {
   index = 0;
   score = 0;
@@ -256,23 +270,21 @@ var restartQuiz = function () {
 }
 
 // start quiz by clicking on start button
-
 var startButton = document.getElementById('startBtn');
-
 startButton.onclick= startQuiz
 
 // submit initials by clickick on submit button
-
 var submitBtnEl = document.querySelector("#submitBtn");
 submitBtnEl.addEventListener("click", submitScoreFormHandler);
 
+// restart quiz by clicking on go back button
 var restartBtn = document.querySelector("#restart");
 restartBtn.addEventListener("click", restartQuiz);
 
+// view list of high scores by clicking on view highscores button
 var viewHighScores = document.querySelector(".high-scores");
 viewHighScores.addEventListener("click", showHighScores);
 
-
-
+// clear high scores by click on clear highscores button
 var clearScoresBtn = document.querySelector("#clear-scores");
 clearScoresBtn.addEventListener("click", clearHighScores);
